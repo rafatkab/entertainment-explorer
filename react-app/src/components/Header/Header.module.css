@@ -1,0 +1,11 @@
+.container {
+    text-align: center;
+    padding: 30px;
+    height: 20vh;
+    
+}
+
+body .desc {
+    margin-top: 45px;
+    font-size: 17px;
+}
