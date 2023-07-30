@@ -1,8 +1,18 @@
 .container {
-    text-align: center;
-    padding: 30px;
-    background-color: #201e1e;
-    width: 25%;
-    height: 80vh;
+    text-align: left;
+    padding: 20px 0px 20px;
+    width: 15%;
     float: left;
+    background-color: #070602;
+    border: solid 2px white;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+}
+
+.filter {
+    margin-top: 15px;
+    margin-left: 10px;
+    color: lightslategray;
+    font-size:medium;
 }

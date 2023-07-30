@@ -1,5 +1,23 @@
 .container{
+    width:85%;
+    float: right;
+}
+
+.images-container {
+    margin: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+img {
+    height: 275px;
+    border-radius: 20px;
+}
+
+.image {
     text-align: center;
-    padding: 30px;
-    height: 80vh;
+    float: none;
+    color: white;
 }
