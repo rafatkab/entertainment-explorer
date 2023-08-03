@@ -1,0 +1,44 @@
+.container{
+    width:85%;
+    float: right;
+    color: white;
+}
+
+.images-container {
+    margin-top: 20px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+img {
+    height: 275px;
+    border-radius: 20px;
+}
+
+.image {
+    text-align: center;
+    float: none;
+    color: white;
+}
+
+.section-container {
+    /* border: solid 2px; */
+    height: 60px;
+    margin: 5px;
+}
+
+.section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 16px;
+    border-bottom: solid 2px;
+    border-color: cyan;
+    height: 30px;
+    width: 60px;
+    float: right;
+    margin: 15px;
+}

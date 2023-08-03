@@ -9,23 +9,10 @@ const App = () => {
   const [movies, setMovies] = useState(originalMovies);
   const [filters, setFilters] = useState(originalFilters);
 
-  const handleFilters = (filterClicked: string, checkValue: boolean) => {
-    let filtersTemporary: { name: string; value: boolean }[] = [];
+  useEffect(() => {
     let noFilter: boolean = true;
 
-    setFilters(
-      filters.map((filter) => {
-        if (filter.name.toLowerCase() == filterClicked.toLowerCase()) {
-          filtersTemporary.push({ name: filter.name, value: checkValue });
-          return { name: filter.name, value: checkValue };
-        } else {
-          filtersTemporary.push(filter);
-          return filter;
-        }
-      })
-    );
-
-    for (const filter of filtersTemporary) {
+    for (const filter of filters) {
       if (filter.value == true) {
         noFilter = false;
       }
@@ -37,7 +24,7 @@ const App = () => {
       setMovies(
         originalMovies.filter((movie) => {
           for (const theme of movie.themes) {
-            for (const { name, value } of filtersTemporary) {
+            for (const { name, value } of filters) {
               if (theme.toLowerCase() == name.toLowerCase() && value) {
                 return true;
               }
@@ -48,6 +35,18 @@ const App = () => {
         })
       );
     }
+  }, [filters]);
+
+  const handleFilters = (filterClicked: string, checkValue: boolean) => {
+    setFilters(
+      filters.map((filter) => {
+        if (filter.name.toLowerCase() == filterClicked.toLowerCase()) {
+          return { name: filter.name, value: checkValue };
+        } else {
+          return filter;
+        }
+      })
+    );
   };
 
   return (
