@@ -4,7 +4,7 @@ let originalMovies = [
     themes: ["action", "drama", "horror"],
     title: "Oppenheimer",
     image:
-      "https://th.bing.com/th/id/OIF.ruHKrvsjkP3jCWoIO5fqAQ?pid=ImgDet&rs=1",
+      "https://www.cineplex.com/_next/image?url=https%3A%2F%2Fmediafiles.cineplex.com%2FCentral%2FFilm%2FPosters%2F33327_320_470.jpg&w=3840&q=75",
   },
   {
     id: 2,
