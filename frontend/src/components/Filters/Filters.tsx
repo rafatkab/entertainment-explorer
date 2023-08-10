@@ -8,7 +8,7 @@ interface Props {
 
 const Filters = ({ filters, handleFilters }: Props) => {
   return (
-    <div className={styles.container}>
+    <div className={styles["container"]}>
       <div className="mx-3 fs-5">Filters</div>
       {filters.map((filter) => (
         <div key={filter.name} className={styles.filter}>

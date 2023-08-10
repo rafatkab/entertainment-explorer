@@ -30,17 +30,17 @@ let originalMovies = [
 ];
 
 originalMovies = originalMovies.filter((movie) =>
-movie.title.length >= 17
-  ? (movie.title = movie.title.substring(0, 17) + " ...")
-  : movie
-)
+  movie.title.length >= 17
+    ? (movie.title = movie.title.substring(0, 17) + " ...")
+    : movie
+);
 
 const originalFilters = [
-  {name: "Drama", value: false},
-  {name: "Action", value: false},
-  {name: "Horror", value: false},
-  {name: "Comedy", value: false},
-  {name: "Adventure", value: false},
+  { name: "Drama", value: false },
+  { name: "Action", value: false },
+  { name: "Horror", value: false },
+  { name: "Comedy", value: false },
+  { name: "Adventure", value: false },
 ];
 
-export {originalFilters, originalMovies};
+export { originalFilters, originalMovies };

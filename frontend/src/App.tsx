@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Filters from "./components/Filters/Filters";
 import Explorer from "./components/Explorer/Explorer";
+import Register from "./components/Register/Register.tsx";
 import { originalFilters, originalMovies } from "./database.ts";
-import "./App.css";
+import styles from "./App.module.css";
 
 const App = () => {
   const [movies, setMovies] = useState(originalMovies);
@@ -49,12 +51,26 @@ const App = () => {
     );
   };
 
+  const handleRegister = () => {};
+
   return (
-    <>
-      <Header />
-      <Filters filters={filters} handleFilters={handleFilters} />
-      <Explorer movies={movies} />
-    </>
+    <div className={styles["container"]}>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Header handleRegister={handleRegister} />
+              <div className="d-flex align-items-start">
+                <Filters filters={filters} handleFilters={handleFilters} />
+                <Explorer movies={movies} />
+              </div>
+            </>
+          }
+        />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </div>
   );
 };
 

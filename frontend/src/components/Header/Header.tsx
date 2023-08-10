@@ -1,10 +1,22 @@
 import styles from "./Header.module.css";
+import { Link } from "react-router-dom";
 
-const Header = () => {
+interface Props {
+  handleRegister: () => void;
+}
+
+const Header = ({ handleRegister }: Props) => {
   return (
-    <div className={styles.container}>
-      <div className={styles["sign-log"] + " btn btn-light "}>Log in</div>
-      <div className={styles["sign-log"] + " btn btn-light"}>Sign up</div>
+    <div className={styles["container"]}>
+      <button className={styles["sign-log"] + " btn btn-light "}>Log in</button>
+      <Link to="/register">
+        <button
+          className={styles["sign-log"] + " btn btn-light"}
+          onClick={handleRegister}
+        >
+          Sign up
+        </button>
+      </Link>
       <div className="form-check form-switch float-start m-3 fs-5 ">
         <label className="form-check-label">
           Dark mode
