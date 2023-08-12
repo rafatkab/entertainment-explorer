@@ -1,17 +1,17 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from form.models import Item
-from .serializers import ItemSerializer
+from account.models import Account
+from .serializers import AccountSerializer
 
 @api_view(["GET"])
 def getData(request):
-    items = Item.objects.all() 
-    serializer = ItemSerializer(items, many=True)
+    accounts = Account.objects.all() 
+    serializer = AccountSerializer(accounts, many=True)
     return Response(serializer.data)
 
 @api_view(["POST"])
 def addItem(request):
-    serializer = ItemSerializer(data=request.data)
+    serializer = AccountSerializer(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
