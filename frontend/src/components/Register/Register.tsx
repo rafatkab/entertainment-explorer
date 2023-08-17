@@ -3,6 +3,7 @@ import styles from "./Register.module.css";
 import { ZodType, date, z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import api from "../../services/api";
 
 const Register = () => {
   type FormData = {
@@ -40,7 +41,14 @@ const Register = () => {
   });
 
   const submitData = (data: FormData) => {
-    console.log(data);
+    api
+      .post("submitted/", {
+        birth_date: data.birthDate,
+        username: data.userName,
+        password: data.pass,
+        email: data.email,
+      })
+      .then((res) => console.log(res.data));
   };
 
   const datePickerId = new Date().toISOString().split("T")[0];
@@ -84,7 +92,7 @@ const Register = () => {
                 className="form-control my-2"
                 type="text"
                 placeholder="Jacob77"
-                size="36"
+                size={36}
                 {...register("userName")}
               />
               {errors.userName && (
@@ -100,7 +108,7 @@ const Register = () => {
                 className="form-control my-2"
                 type="password"
                 placeholder="Enter password"
-                size="36"
+                size={36}
                 {...register("pass")}
               />
               {errors.pass && (
@@ -116,7 +124,7 @@ const Register = () => {
                 className="form-control my-2"
                 type="password"
                 placeholder="Re-type password"
-                size="36"
+                size={36}
                 {...register("confirmPass")}
               />
               {errors.confirmPass && (
@@ -133,7 +141,7 @@ const Register = () => {
                 className="form-control my-2"
                 type="email"
                 placeholder="example@gmail.com"
-                size="36"
+                size={36}
                 {...register("email")}
               />
               {errors.email && (

@@ -10,10 +10,9 @@ def getData(request):
     return Response(serializer.data)
 
 @api_view(["POST"])
-def addItem(request):
+def addAccount(request):
     serializer = AccountSerializer(data=request.data)
 
-    if serializer.is_valid():
+    if serializer.is_valid() == True:
         serializer.save()
-
-    return Response(serializer.data)
+        return Response(serializer.data)

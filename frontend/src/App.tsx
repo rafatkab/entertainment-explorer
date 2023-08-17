@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import api from "./api";
+import axios from "axios";
 import Header from "./components/Header/Header";
 import Filters from "./components/Filters/Filters";
 import Explorer from "./components/Explorer/Explorer";
