@@ -1,10 +1,24 @@
 import styles from "./Explorer.module.css";
+import { movieObj } from "../../types.ts";
+import { useRef, useState } from "react";
 
 interface Props {
-  movies: { id: number; themes: string[]; title: string; image: string }[];
+  movies: movieObj[];
+  handleSearch: (searchString: string) => void;
 }
 
-const Explorer = ({ movies }: Props) => {
+const Explorer = ({ movies, handleSearch }: Props) => {
+  const searchString = useRef(null);
+  const [searchFocus, setSearchFocus] = useState(false);
+
+  const handleKeyPress = (event: { key: string }) => {
+    if (event.key === "Enter" && searchFocus) {
+      if (searchString.current != null) {
+        handleSearch(searchString.current.value);
+      }
+    }
+  };
+
   return (
     <div className={styles["container"]}>
       <div className={styles["section-container"]}>
@@ -25,6 +39,12 @@ const Explorer = ({ movies }: Props) => {
             className="form-control"
             placeholder="Search"
             aria-label="Search"
+            onFocus={() => {
+              setSearchFocus(true);
+            }}
+            onBlur={() => setSearchFocus(false)}
+            onKeyUp={handleKeyPress}
+            ref={searchString}
           ></input>
         </div>
         <div className={styles["section"]}>Movies</div>
@@ -33,8 +53,10 @@ const Explorer = ({ movies }: Props) => {
       </div>
       <div className={styles["images-container"]}>
         {movies.map((movie) => (
-          <div key={movie["title"]} className={styles["image"]}>
-            <img src={movie["image"]} />
+          <div key={movie["id"]} className={styles["image"]}>
+            <img
+              src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+            />
             <div className={styles["title"]}>{movie["title"]}</div>
           </div>
         ))}

@@ -6,14 +6,22 @@
   margin-top: 20px;
   padding: 30px;
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 16px;
 }
 
 img {
+  max-width: 183.3px;
   height: 275px;
   border-radius: 20px;
+}
+
+.title {
+  width: 190px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* border: solid 2px; */
 }
 
 .image {
