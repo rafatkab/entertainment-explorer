@@ -45,8 +45,30 @@ export interface movieDetails {
 
 export interface movieRating {
     id: number;
+    account_id: number;
     movie_id: number;
     poster_path: string;
     rating: number;
     title: string;
 }
+
+export interface RegisterData {
+    birthDate: string;
+    userName: string;
+    pass: string;
+    confirmPass: string;
+    email: string;
+  };
+
+  export interface LoginData {
+    userName: string;
+    pass: string;
+  }
+
+export interface Account {
+    birth_date: string;
+    email: string;
+    id: number;
+    password: string;
+    username: string;
+};

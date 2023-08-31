@@ -8,7 +8,11 @@ interface Props {
 const Header = ({ handleRegister }: Props) => {
   return (
     <div className={styles["container"]}>
-      <button className={styles["sign-log"] + " btn btn-light "}>Log in</button>
+      <Link to="login/">
+        <button className={styles["sign-log"] + " btn btn-light "}>
+          Log in
+        </button>
+      </Link>
       <Link to="register/">
         <button
           className={styles["sign-log"] + " btn btn-light"}

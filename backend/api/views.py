@@ -3,9 +3,9 @@ from rest_framework.decorators import api_view
 from account_management.models import *
 from .serializers import *
 
-@api_view(["GET"])
-def get_account(request):
-    accounts = Account.objects.all() 
+@api_view(["GET"]) 
+def get_all_accounts(request):
+    accounts = Account.objects.all()
     serializer = AccountSerializer(accounts, many=True)
     return Response(serializer.data)
 
@@ -35,7 +35,6 @@ def movie_rating(request, movie_id):
             if serializer.is_valid() == True:
                 serializer.save()
                 return Response(serializer.data)
-            return Response(serialize)
     
     except:
         if request.method == "GET":

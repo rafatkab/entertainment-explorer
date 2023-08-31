@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { movieObj } from "../types.ts";
 import Header from "../components/MediaVoyage/Header/Header.tsx";
-import Filters from "../components/MediaVoyage/Filters/Filters.tsx";
 import Explorer from "../components/MediaVoyage/Explorer/Explorer.tsx";
 import PageExplorer from "../components/MediaVoyage/PageExplorer.tsx";
 import styles from "../index.module.css";
@@ -15,7 +13,6 @@ const MediaVoyage = () => {
   const [url, setUrl] = useState(
     `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${page}`
   );
-  const [finishLoading, setFinishLoading] = useState(false);
 
   useEffect(() => {
     axios
@@ -24,9 +21,7 @@ const MediaVoyage = () => {
         setMovies(res.data.results);
         setMaxPages(res.data.total_pages);
       })
-      .then(() => {
-        setFinishLoading(true);
-      });
+      .then(() => {});
   }, [url]);
 
   const handleRegister = () => {};
@@ -49,10 +44,6 @@ const MediaVoyage = () => {
     );
     setPage(pageNum);
   };
-
-  useEffect(() => {
-    console.log(movies);
-  });
 
   return (
     <div className={styles["container"]}>

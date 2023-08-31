@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { movieRating } from "../../types";
 import { Rate } from "antd";
 

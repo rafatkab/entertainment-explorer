@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../index.module.css";
 import api from "../services/api";
 import { movieRating } from "../types";
@@ -22,14 +22,16 @@ const List = () => {
         title: movie.title,
         rating: rating,
       })
-      .then((res) => setListUpdated(!listUpdated));
+      .then(() => setListUpdated(!listUpdated));
   };
 
   const handleDeleteRating = (movieId: number) => {
     api
       .delete(`movies/movie-ratings/${movieId}/`)
-      .then((res) => setListUpdated(!listUpdated));
+      .then(() => setListUpdated(!listUpdated));
   };
+
+  console.log(movieRatings);
 
   return (
     <div className={styles["container"]}>
