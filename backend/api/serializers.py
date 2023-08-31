@@ -1,7 +1,12 @@
 from rest_framework import serializers
-from account.models import Account
+from account_management.models import *
 
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
+        fields = ['username', 'email']
+        
+class MovieRatingsListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MovieRatingsList
         fields = '__all__'
