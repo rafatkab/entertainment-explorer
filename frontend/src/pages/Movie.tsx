@@ -1,11 +1,10 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { movieDetails } from "../types";
 import apiKey from "../apiKey";
 import styles from "../index.module.css";
 import Details from "../components/Movie/Details";
-import Genres from "../components/Movie/Genres";
 import Header from "../components/Movie/Header";
 import GeneralDetails from "../components/Movie/GeneralDetails";
 import api from "../services/api";
