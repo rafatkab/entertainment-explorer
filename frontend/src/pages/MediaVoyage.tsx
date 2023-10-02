@@ -5,15 +5,22 @@ import Explorer from "../components/MediaVoyage/Explorer/Explorer.tsx";
 import PageExplorer from "../components/MediaVoyage/PageExplorer.tsx";
 import styles from "../index.module.css";
 import apiKey from "../apiKey.ts";
+import { useParams, useNavigate } from "react-router-dom";
 
 const MediaVoyage = () => {
-  const [page, setPage] = useState(1);
+  const navigate = useNavigate()
+  const {page, search} = useParams();
+  let searchString = search != undefined ? search : ""
+  let pageNum = page != undefined ? page : "1"
   const [maxPages, setMaxPages] = useState();
   const [movies, setMovies] = useState();
   const [url, setUrl] = useState(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${page}`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNum}`
   );
 
+  console.log(pageNum, searchString);
+  
+  
   useEffect(() => {
     axios
       .get(url)
@@ -21,28 +28,36 @@ const MediaVoyage = () => {
         setMovies(res.data.results);
         setMaxPages(res.data.total_pages);
       })
-      .then(() => {});
   }, [url]);
+
+  useEffect(() => {
+    setUrl(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNum}`);
+  }, [pageNum])
+
+  useEffect(() => {
+    if (searchString == (undefined || "")) {
+      setUrl(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNum}`);
+    }
+    else {
+      setUrl(`https://api.themoviedb.org/3/search/movie?query=${searchString}&api_key=${apiKey}`)
+    }
+    
+  }, [searchString])
 
   const handleRegister = () => {};
 
   const handleSearch = (searchString: string) => {
     if (searchString == "") {
-      setUrl(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${page}`
-      );
+      // setUrl(
+      //   `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNum}`
+      // );
+      navigate(`/1`)
     } else {
-      setUrl(
-        `https://api.themoviedb.org/3/search/movie?query=${searchString}&api_key=${apiKey}`
-      );
+      // setUrl(
+      //   `https://api.themoviedb.org/3/search/movie?query=${searchString}&api_key=${apiKey}`
+      // );
+      navigate(`/${searchString}/1`)
     }
-  };
-
-  const handleChangePage = (pageNum: number) => {
-    setUrl(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNum}`
-    );
-    setPage(pageNum);
   };
 
   return (
@@ -53,9 +68,8 @@ const MediaVoyage = () => {
           <>
             <Explorer movies={movies} handleSearch={handleSearch} />{" "}
             <PageExplorer
-              page={page}
+              searchString={searchString}
               maxPages={maxPages > 500 ? 500 : maxPages}
-              handleChangePage={handleChangePage}
             />
           </>
         ) : null}

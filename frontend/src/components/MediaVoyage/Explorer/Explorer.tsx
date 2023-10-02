@@ -1,7 +1,7 @@
 import styles from "./Explorer.module.css";
 import { movieObj } from "../../../types.ts";
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 interface Props {
   movies: movieObj[];

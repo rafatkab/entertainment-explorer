@@ -8,12 +8,12 @@ interface Props {
 const Header = ({ handleRegister }: Props) => {
   return (
     <div className={styles["container"]}>
-      <Link to="login/">
+      <Link to="/login">
         <button className={styles["sign-log"] + " btn btn-light "}>
           Log in
         </button>
       </Link>
-      <Link to="register/">
+      <Link to="/register">
         <button
           className={styles["sign-log"] + " btn btn-light"}
           onClick={handleRegister}

@@ -1,19 +1,15 @@
+import { Link, useParams } from "react-router-dom";
+
 interface Props {
-  page: number;
+  searchString : string | undefined;
   maxPages: number;
-  handleChangePage: (pageNum: number) => void;
 }
 
-const PageExplorer = ({ maxPages, page, handleChangePage }: Props) => {
-  const handlePageBehaviour = (num: number) => {
-    // if (num <= 3) {
-    //   return [1, 2, 3, 4, 5];
-    // } else if (num >= 498) {
-    //   return [496, 497, 498, 499, 500];
-    // } else {
-    //   return [num - 2, num - 1, num, num + 1, num + 2];
-    // }
+const PageExplorer = ({ searchString, maxPages }: Props) => {
+  let {page} = useParams();
+  let pageNum = parseInt(page != undefined ? page : "1")
 
+  const handlePageBehaviour = (num: number) => {
     if (maxPages <= 5) {
       return Array(3).map((val, index) => index+1)
     }
@@ -32,65 +28,66 @@ const PageExplorer = ({ maxPages, page, handleChangePage }: Props) => {
 
   return (
     <center className="m-4">
+      <Link to={`/${searchString}/1`}>
       <button
         className="btn btn-dark border-white"
-        onClick={() => handleChangePage(1)}
-        disabled={page == 1 ? true : false}
+        disabled={pageNum == 1 ? true : false}
       >
         {"First page"}
       </button>
+      </Link>
+      <Link to={`/${searchString}/${pageNum-2}`}>
       <button
         className="btn btn-dark border-white"
-        onClick={() => {
-          const num = page - 2;
-          handleChangePage(num);
-        }}
-        disabled={page <= 2 ? true : false}
+        disabled={pageNum <= 2 ? true : false}
       >
         {"<<"}
       </button>
+      </Link>
+      <Link to={`/${searchString}/${--pageNum}`}>
       <button
         className="btn btn-dark border-white"
-        disabled={page <= 1 ? true : false}
-        onClick={() => handleChangePage(--page)}
+        disabled={pageNum <= 1 ? true : false}
       >
         {"<"}
       </button>
-      {handlePageBehaviour(page).map((num) => (
+      </Link>
+      {handlePageBehaviour(pageNum).map((num) => (
+        <Link to={`/${searchString}/${num}`}>
         <button
           key={num}
           className={
-            "btn border-white" + (num == page ? " btn-info" : " btn-dark")
+            "btn border-white" + (num == pageNum+1 ? " btn-info" : " btn-dark")
           }
-          onClick={() => handleChangePage(num)}
         >
           {num}
         </button>
+        </Link>
       ))}
+      <Link to={`/${searchString}/${++pageNum}`}>
       <button
         className="btn btn-dark border-white"
-        onClick={() => handleChangePage(++page)}
-        disabled={page >= maxPages ? true : false}
+        disabled={pageNum >= maxPages ? true : false}
       >
         {">"}
       </button>
+      </Link>
+      <Link to={`/${searchString}/${pageNum+2}`}>
       <button
         className="btn btn-dark border-white"
-        onClick={() => {
-          const num = page + 2;
-          handleChangePage(num);
-        }}
-        disabled={page >= maxPages-1 ? true : false}
+        disabled={pageNum >= maxPages-1 ? true : false}
       >
         {">>"}
       </button>
+      </Link>
+      <Link to={`/${searchString}/${maxPages}`}>
       <button
         className="btn btn-dark border-white"
-        onClick={() => handleChangePage(500)}
-        disabled={page == maxPages ? true : false}
+        disabled={pageNum == maxPages ? true : false}
       >
         {"Last page"}
       </button>
+      </Link>
     </center>
   );
 };
