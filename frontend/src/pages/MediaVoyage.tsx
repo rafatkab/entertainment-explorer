@@ -10,16 +10,13 @@ import { useParams, useNavigate } from "react-router-dom";
 const MediaVoyage = () => {
   const navigate = useNavigate()
   const {page, search} = useParams();
-  let searchString = search != undefined ? search : ""
+  let searchString = search != undefined ? search : "home"
   let pageNum = page != undefined ? page : "1"
   const [maxPages, setMaxPages] = useState();
   const [movies, setMovies] = useState();
   const [url, setUrl] = useState(
     `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNum}`
   );
-
-  console.log(pageNum, searchString);
-  
   
   useEffect(() => {
     axios
@@ -30,19 +27,20 @@ const MediaVoyage = () => {
       })
   }, [url]);
 
-  useEffect(() => {
-    setUrl(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNum}`);
-  }, [pageNum])
+  // useEffect(() => {
+  //   setUrl(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNum}`);
+  // }, [pageNum])
 
   useEffect(() => {
-    if (searchString == (undefined || "")) {
+    if (searchString == ("home")) {
       setUrl(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNum}`);
     }
     else {
-      setUrl(`https://api.themoviedb.org/3/search/movie?query=${searchString}&api_key=${apiKey}`)
-    }
-    
-  }, [searchString])
+      setUrl(`https://api.themoviedb.org/3/search/movie?query=${searchString}&api_key=${apiKey}&page=${pageNum}`)
+    }}, [searchString, pageNum])
+
+  console.log(url, search);
+  
 
   const handleRegister = () => {};
 
@@ -51,7 +49,7 @@ const MediaVoyage = () => {
       // setUrl(
       //   `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${pageNum}`
       // );
-      navigate(`/1`)
+      navigate(`home/1`)
     } else {
       // setUrl(
       //   `https://api.themoviedb.org/3/search/movie?query=${searchString}&api_key=${apiKey}`
